@@ -1,0 +1,105 @@
+-- C00LKID PRETO E VERMELHO GUI COM SCROLL + 9 OPÇÕES
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Criar a GUI
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+screenGui.Name = "C00LKID_PRETO_E_VERMELHO"
+
+-- Frame principal
+local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Size = UDim2.new(0, 260, 0, 330) -- aumentei altura para 9 opções
+mainFrame.Position = UDim2.new(0.05, 0, 0.4, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.BorderSizePixel = 2
+mainFrame.Active = true
+mainFrame.Draggable = true
+
+-- Título
+local title = Instance.new("TextLabel", mainFrame)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Text = "C00LKID HUB"
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(255, 0, 0)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 16
+
+-- ScrollFrame para botões
+local scroll = Instance.new("ScrollingFrame", mainFrame)
+scroll.Size = UDim2.new(1, -10, 1, -40)
+scroll.Position = UDim2.new(0, 5, 0, 35)
+scroll.CanvasSize = UDim2.new(0, 0, 0, 620) -- ajustado para 9 botões
+scroll.ScrollBarThickness = 6
+scroll.BackgroundTransparency = 1
+scroll.BorderSizePixel = 0
+
+-- Layout automático
+local layout = Instance.new("UIListLayout", scroll)
+layout.Padding = UDim.new(0, 10)
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+-- Função para criar botões
+local function createButton(name, callback)
+	local btn = Instance.new("TextButton", scroll)
+	btn.Size = UDim2.new(1, -10, 0, 40)
+	btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	btn.Text = name
+	btn.TextColor3 = Color3.fromRGB(0, 0, 0)
+	btn.Font = Enum.Font.Gotham
+	btn.TextSize = 14
+	btn.MouseButton1Click:Connect(callback)
+end
+
+-- Opções do Menu
+createButton("Speed (600)", function()
+	humanoid.WalkSpeed = 600
+end)
+
+createButton("JumpBoost (230)", function()
+	humanoid.JumpPower = 230
+end)
+
+createButton("Resetar JumpBoost", function()
+	humanoid.JumpPower = 50
+end)
+
+local spinning = false
+local spinConnection
+createButton("Spin (Ativar/Desativar)", function()
+	spinning = not spinning
+	if spinning then
+		spinConnection = RunService.RenderStepped:Connect(function()
+			if character and character:FindFirstChild("HumanoidRootPart") then
+				character.HumanoidRootPart.CFrame *= CFrame.Angles(0, math.rad(360 * 1/60), 0)
+			end
+		end)
+	else
+		if spinConnection then
+			spinConnection:Disconnect()
+			spinConnection = nil
+		end
+	end
+end)
+
+createButton("Angel Hub", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/Angel-hub/main/Main.txt"))()
+end)
+
+createButton("Nameless Admin", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
+end)
+
+createButton("Portal Gun", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/Portal-gun-/main/Main.txt"))()
+end)
+
+createButton("Infinite Yield", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+createButton("Ghost Hub", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub"))()
+end)
