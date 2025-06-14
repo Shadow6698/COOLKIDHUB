@@ -11,7 +11,7 @@ screenGui.Name = "C00LKID_PRETO_E_VERMELHO"
 
 -- Frame principal
 local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Size = UDim2.new(0, 260, 0, 330) -- aumentei altura para 9 opções
+mainFrame.Size = UDim2.new(0, 260, 0, 330)
 mainFrame.Position = UDim2.new(0.05, 0, 0.4, 0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.BorderSizePixel = 2
@@ -31,7 +31,7 @@ title.TextSize = 16
 local scroll = Instance.new("ScrollingFrame", mainFrame)
 scroll.Size = UDim2.new(1, -10, 1, -40)
 scroll.Position = UDim2.new(0, 5, 0, 35)
-scroll.CanvasSize = UDim2.new(0, 0, 0, 620) -- ajustado para 9 botões
+scroll.CanvasSize = UDim2.new(0, 0, 0, 620)
 scroll.ScrollBarThickness = 6
 scroll.BackgroundTransparency = 1
 scroll.BorderSizePixel = 0
@@ -84,8 +84,9 @@ createButton("Spin (Ativar/Desativar)", function()
 	end
 end)
 
+-- ✅ Novo Angel Hub atualizado
 createButton("Angel Hub", function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/Angel-hub/main/Main.txt"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Shadow6698/angelhub/main/Main.txt"))()
 end)
 
 createButton("Nameless Admin", function()
